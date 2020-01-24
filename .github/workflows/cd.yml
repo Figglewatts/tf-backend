@@ -1,0 +1,18 @@
+name: CD
+on: [push]
+env:
+  TF_VAR_bucket_name: ${{ secrets.bucket_name }} 
+  TF_VAR_digitalocean_token: ${{ secrets.digitalocean_token }} 
+  TF_VAR_spaces_key: ${{ secrets.spaces_key }}
+  TF_VAR_spaces_secret: ${{ secrets.spaces_secret }}  
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Terraform init
+      run: terraform init --input=false
+    - name: Terraform plan
+      run: terraform plan --out=tfplan --input=false
+    - name: Terraform apply
+      run: terraform apply --input=false tfplan
