@@ -1,5 +1,7 @@
 name: CD
-on: [push]
+on:
+  push:
+    branches: [master]
 env:
   TF_VAR_bucket_name: ${{ secrets.bucket_name }} 
   TF_VAR_digitalocean_token: ${{ secrets.digitalocean_token }} 
