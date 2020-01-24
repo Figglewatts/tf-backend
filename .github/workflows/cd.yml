@@ -18,3 +18,4 @@ jobs:
       run: terraform plan --out=tfplan --input=false
     - name: Terraform apply
       run: terraform apply --input=false tfplan
+      continue-on-error: true # as we don't track state, this will error if the space already exists
